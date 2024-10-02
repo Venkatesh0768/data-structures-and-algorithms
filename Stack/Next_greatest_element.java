@@ -20,7 +20,7 @@ public class Next_greatest_element {
         for( int i = arr.length-1; i>=0; i--){
 
             while (!s.isEmpty() && arr[s.peek()] <= arr[i]){
-                s.pop();
+               s.pop(); 
             }
                if(s.isEmpty()){
                     nextg[i] = -1;
