@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Stack_and_Queue_using_Dequeue {
 
-    static class Stack_using_dequeue {
+    static class Stack_using_deque {
 
         static Deque<Integer> Deque = new LinkedList<>();
 
@@ -19,8 +19,29 @@ public class Stack_and_Queue_using_Dequeue {
         }
     }
 
+
+    static class Queue_using_deque {
+
+        static Deque<Integer> Deque = new LinkedList<>();
+
+        public static void add(int data) {
+            Deque.addLast(data);
+        }
+
+        public static int pop(){
+            return Deque.removeFirst();
+        }
+
+        public static int peek(){
+            return Deque.getFirst();
+        }
+    }
+
+
     public static void main(String[] args) {
-            Stack_using_dequeue s = new Stack_using_dequeue();
+
+            // Stack_using_deque s = new Stack_using_deque();
+            Queue_using_deque s = new Queue_using_deque();
             s.add(1);
             s.add(2);
             s.add(3);
