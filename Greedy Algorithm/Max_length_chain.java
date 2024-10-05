@@ -21,7 +21,7 @@ public class Max_length_chain {
                 endChain = arr[i][2];
             }
         }
-       System.out.println(maxChian);
+       System.out.println(+maxChian);
         
     }
     
