@@ -1,11 +1,10 @@
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.*;
 import java.lang.Math;
 
 /**
  * Binary_tree
  */
+
 public class Binary_tree {
 
     static class Node {
@@ -21,6 +20,7 @@ public class Binary_tree {
 
     }
 
+    
     static class Binary_trees {
         static int idx = -1;
 
@@ -70,55 +70,54 @@ public class Binary_tree {
             System.out.print(root.data + " ");
         }
 
-        public static void levelorder(Node root){ //O(n)
+        public static void levelorder(Node root) { // O(n)
 
-            if(root == null){
-                
+            if (root == null) {
+
                 return;
             }
-           Queue<Node> q = new LinkedList<>();
+            Queue<Node> q = new LinkedList<>();
             q.add(root);
             q.add(null);
 
             while (!q.isEmpty()) {
+
                 Node currNode = q.remove();
-                if (currNode==null) {
+
+                if (currNode == null) {
                     if (q.isEmpty()) {
                         break;
-                    }else{
+                    } else {
                         q.add(null);
                     }
-                }else{
+                } else {
                     System.out.print(currNode.data + " ");
-                    if(currNode.left != null){
+                    if (currNode.left != null) {
                         q.add(currNode.left);
                     }
-                    if(currNode.right != null){
+                    if (currNode.right != null) {
                         q.add(currNode.right);
                     }
                 }
             }
 
-            
         }
 
-
-
-        public static int height(Node root){
+        public static int height(Node root) {
             if (root == null) {
                 return 0;
-    
+
             }
 
             int LH = height(root.left);
             int RH = height(root.right);
-            return Math.max(LH, RH) +1;
+            return Math.max(LH, RH) + 1;
         }
 
-        public static int Count(Node root){
+        public static int Count(Node root) {
             if (root == null) {
                 return 0;
-    
+
             }
 
             int LH = Count(root.left);
@@ -126,10 +125,10 @@ public class Binary_tree {
             return RH + LH + 1;
         }
 
-        public static int Sum_of_Nodes(Node root){
+        public static int Sum_of_Nodes(Node root) {
             if (root == null) {
                 return 0;
-    
+
             }
 
             int LH = Count(root.left);
@@ -137,38 +136,137 @@ public class Binary_tree {
             return RH + LH + root.data;
         }
 
-
-        public static int diameter(Node root){
-            if(root ==  null){
+        public static int diameter(Node root) {
+            if (root == null) {
                 return 0;
             }
 
             int leftDiameter = diameter(root.left);
             int rightDiameter = diameter(root.right);
             int lh = height(root.left);
-            int rh = height(root.right); 
-    
-            int selfNode = lh +rh+1;
-    
-            return Math.max(selfNode , Math.max(leftDiameter , rightDiameter));
+            int rh = height(root.right);
+
+            int selfNode = lh + rh + 1;
+
+            return Math.max(selfNode, Math.max(leftDiameter, rightDiameter));
         }
 
-       
+    }
 
+    public static boolean isIdentical(Node node, Node subtree) {
+        if (node == null && subtree == null) {
+            return true;
+        } else if (node == null || subtree == null || node.data != subtree.data) {
+            return false;
+        }
+        if (!isIdentical(node.left, subtree.left)) {
+            return false;
+        }
+        if (!isIdentical(node.right, subtree.right)) {
+            return false;
+        }
 
+        return true;
+    }
 
+    public static boolean isSubtree(Node root, Node subtree) {
+        if (root == null) {
+            return false;
+        }
 
+        if (root.data == subtree.data) {
+            if (isIdentical(root, subtree)) {
+                return true;
+            }
 
+        }
+
+        return isSubtree(root.left, subtree) || isSubtree(root.right, subtree);
+
+    }
+
+    public List<Integer> inorderTraversal(Node root) {
+        List<Integer> list = new ArrayList<>();
+
+        if (root == null) {
+            System.out.println("Node is Empty");
+        }
+        inorderTraversal(root.left);
+        list.add(root.data);
+        inorderTraversal(root.right);
+
+        return list;
+
+    }
+
+    static class info {
+        Node node;
+        int hd;
+
+        public info(Node node , int hd){
+            this.node = node;
+            this.hd =hd;
+        }
+
+    }
+
+    public static void TopView(Node root){
+
+        //level order 
+        Queue<info> q =  new LinkedList<>();
+        HashMap<Integer,Node > map = new HashMap<>();
+        int min =0; int max =0;
+        q.add(new info(root , 0));
+        q.add(null);
+
+        while (!q.isEmpty()) {
+            info currNode = q.remove();
+            if (currNode ==  null) {
+                if (q.isEmpty()) {
+                    break;
+                }
+                else{
+                    q.add(null);
+                }
+                
+            }else{
+
+                if (!map.containsKey(currNode.hd)) {
+                    map.put(currNode.hd, currNode.node);
+                }   
+
+                if (currNode.node.left != null) {
+                    q.add(new info(currNode.node.left , currNode.hd-1));
+                    min =  Math.min(min, currNode.hd-1);
+                }
+
+                if (currNode.node.right != null) {
+                    q.add(new info(currNode.node.right , currNode.hd+1));
+                    max = Math.max(max,  currNode.hd+1);
+                }
+            }
+        }
+
+        for(int i =min; i<=max; i++){
+            System.out.print(map.get(i).data + " ");
+        }
 
 
 
     }
- 
-     public static void main(String[] args) {
-        int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
 
-        Binary_trees tree = new Binary_trees();
-        Node root = tree.BuildTree(nodes);
-        System.out.println(tree.diameter(root));
+
+
+       public static void main(String[] args) {
+
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.right = new Node(5);
+        root.left.left = new Node(4);
+        root.right.left= new  Node(7);
+        root.right.right = new Node(6);
+
+            TopView(root);
     }
 }
