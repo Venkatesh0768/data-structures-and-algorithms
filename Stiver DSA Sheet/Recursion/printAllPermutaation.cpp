@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 void recursivePermutation(vector<int> &ds, vector<int> &nums, int freq[])
-{
+{   
 
     if (ds.size() == nums.size())
     {
