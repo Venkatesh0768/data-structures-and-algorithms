@@ -24,23 +24,6 @@ Node *convertArrayToLL(vector<int> &a)
 
     return head;
 }
-void divideOddAndEven(Node* &head){
-    Node* odd; Node* even;
-    while (head)
-    {
-        if (head->data %2 ==0)
-        {
-            even = head->next;
-        }else{
-            odd = head->next;
-        }
-
-        head = head->next;
-        
-    }
-    
-}
-
 void printLL(Node *temp)
 {
     while (temp)
@@ -49,11 +32,41 @@ void printLL(Node *temp)
         temp = temp->next;
     }
 }
+void divideOddAndEven(Node* &head){
+    Node* oddDummy = new Node(-1); 
+    Node* evenDummy = new Node(-1);
+    
+    Node* oddTail = oddDummy;
+    Node* evenTail = evenDummy;
+
+    while (head)
+    {
+        if (head->data %2 ==0)
+        {
+            evenTail->next = head;
+            evenTail = evenTail->next;
+        }else{
+            oddTail->next= head;
+            oddTail = oddTail->next;
+        }
+        head = head->next;
+    }
+    
+    oddTail->next = nullptr;
+    evenTail->next = nullptr;
+
+    printLL(oddDummy->next);
+    cout<<endl;
+    printLL(evenDummy->next);
+    
+}
+
+
 int main()
 {
     vector<int> a = {1, 2, 3,3,2,1};
     Node *head = convertArrayToLL(a);
-    cout<<checkPalindrome(head)<<endl;
+    divideOddAndEven(head);
     printLL(head);
     return 0;
 }

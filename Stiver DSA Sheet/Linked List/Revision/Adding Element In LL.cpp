@@ -51,11 +51,14 @@ Node* insertingAtTail(int key , Node* head){
 //Inserting At the Middle of the LL
 Node* insertingMiddleOfLL(Node* head , int key , int pos){
     Node* newNode = new Node(key);
+
     if(pos ==1){return insertingAtHead(key , head);}
+
     Node* prev = head;
     for(int i = 1; i<pos-1 && prev != NULL; i++){
         prev = prev->next;
     }
+    
     if(prev == nullptr){cout<<"This is Pos is OutOf Bound"; return NULL;}
     newNode->next = prev->next;
     prev->next = newNode;

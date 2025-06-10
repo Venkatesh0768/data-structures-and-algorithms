@@ -45,11 +45,13 @@ bool checkPalindrome(Node *head)
 {
     Node *slow = head;
     Node *fast = head;
+
     while (fast != NULL && fast->next != NULL)
     {
         slow = slow->next;
         fast = fast->next->next;
     }
+    
     Node *newNode = reverseLL(slow->next);
     Node *first = head;
     Node *second = newNode;
