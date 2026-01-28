@@ -19,8 +19,8 @@
 // 1. Sort the array
 // 2. Traverse adjacent elements to find min difference
 // 3. Traverse again to collect all pairs with that difference
-
-import java.util.*;;
+package Day1;
+import java.util.*;
 
 class LeetCode1 {
     public static List<List<Integer>> minimumAbsDifference(int[] arr) {
