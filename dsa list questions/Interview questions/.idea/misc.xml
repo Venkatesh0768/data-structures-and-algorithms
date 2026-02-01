@@ -12,7 +12,15 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/Java-core/pom.xml" />
+        <option value="$PROJECT_DIR$/core-java/pom.xml" />
+        <option value="$PROJECT_DIR$/core-java-interview-prep/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/Java-core/pom.xml" />
+        <option value="$PROJECT_DIR$/core-java/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="temurin-25" project-jdk-type="JavaSDK">
